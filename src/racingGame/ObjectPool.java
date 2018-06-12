@@ -38,8 +38,7 @@ public class ObjectPool
     public void update(GameContainer gc)
     {
         updateObjects(balls, gc);
-        camera.update(0, 0);
-        //System.out.println(0);
+        camera.update(0, 0, 0);
     }
 
     /**
@@ -93,7 +92,7 @@ public class ObjectPool
         {
             if (obj.active)
             {
-                obj.update(gc, 0, 0);
+                obj.update(gc, camera.x, camera.y, camera.angle);
             }
         }
     }
