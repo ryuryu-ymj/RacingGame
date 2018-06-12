@@ -12,12 +12,18 @@ public class Camera
      * 画面の中心座標
      */
     float x, y;
+    /**
+     * カメラの角度<br>
+     * 12時から時計回り　ラジアン
+     */
+    float angle;
     boolean active;
 
     Camera()
     {
         x = 0;
         y = 0;
+        angle = 0;
         active = true;
     }
 
@@ -25,15 +31,17 @@ public class Camera
      * 更新処理<br>
      * プレイヤーが中心に来るようになる
      *
-     * @param playerX プレイヤーのx座標
-     * @param playerY プレイヤーのy座標
+     * @param x     カメラのx座標
+     * @param y     カメラのy座標
+     * @param angle カメラの向き　12時から時計回り　ラジアン
      */
-    void update(float playerX, float playerY)
+    void update(float x, float y, float angle)
     {
         if (active)
         {
-            x = playerX;
-            y = playerY;
+            this.x = x;
+            this.y = y;
+            this.angle = angle;
         }
     }
 }
