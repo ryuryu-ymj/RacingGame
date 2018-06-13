@@ -32,13 +32,13 @@ public class Ball extends GameObject
     }
 
     @Override
-    public void update(GameContainer gc, float cameraX, float cameraY)
+    public void update(GameContainer gc, float cameraX, float cameraY, float cameraAngle)
     {
         speedY += 0.1;
 
         abX += speedX;
         abY += speedY;
-        changeToDisplayPoint(cameraX, cameraY);
+        changeToDisplayPoint(cameraX, cameraY, cameraAngle);
     }
 
     @Override
@@ -46,7 +46,6 @@ public class Ball extends GameObject
     {
         g.setColor(Color.black);
         g.drawOval(diX, diY, width, height);
-        System.out.println(diX + " " + diY);
     }
 
     public void boundX()
