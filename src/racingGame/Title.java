@@ -36,7 +36,7 @@ public class Title extends GameState
             darkness = 0;
         }
 
-        if(gc.getInput().isKeyPressed(Input.KEY_SPACE))
+        if (gc.getInput().isKeyPressed(Input.KEY_SPACE))
         {
             nextState = true;
         }
