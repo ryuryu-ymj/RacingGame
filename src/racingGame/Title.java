@@ -23,17 +23,17 @@ public class Title extends GameState
     public void init(GameContainer gc) throws SlickException
     {
         // TODO 自動生成されたメソッド・スタブ
-        darkness = 0;
+        darkness = 1;
     }
 
     @Override
     public void update(GameContainer gc, int delta) throws SlickException
     {
         // TODO 自動生成されたメソッド・スタブ
-        darkness += 0.05;
-        if (darkness > 1)
+        darkness *= 0.82;
+        if (darkness < 0.01)
         {
-            darkness = 0;
+            darkness = 3;
         }
 
         if (gc.getInput().isKeyPressed(Input.KEY_SPACE))
