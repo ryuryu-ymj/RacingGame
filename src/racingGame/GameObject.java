@@ -67,7 +67,7 @@ public abstract class GameObject
      * @param cameraY     カメラの中心点のy座標
      * @param cameraAngle カメラの角度　12時から時計回り　ラジアン
      */
-    void changeToDisplayPoint(float cameraX, float cameraY, float cameraAngle)
+    public void changeToDisplayPoint(float cameraX, float cameraY, float cameraAngle)
     {
         double radius = Math.sqrt(Math.pow(abX - cameraX, 2) + Math.pow(abY - cameraY, 2));
         double angle = Math.atan2(abY - cameraY, abX - cameraX) - cameraAngle;
