@@ -48,8 +48,12 @@ public abstract class GameObject
 
     /**
      * ステップごとの更新.
+     *
+     * @param cameraX     カメラの中心点のx座標
+     * @param cameraY     カメラの中心点のy座標
+     * @param cameraAngle カメラの角度　12時から時計回り　ラジアン
      */
-    public abstract void update(GameContainer gc, float cameraX, float cameraY);
+    public abstract void update(GameContainer gc, float cameraX, float cameraY, float cameraAngle);
 
     /**
      * ステップごとの描画処理.
@@ -59,13 +63,16 @@ public abstract class GameObject
     /**
      * 絶対座標を画面座標に変換する
      *
-     * @param cameraX カメラの中心点のx座標
-     * @param cameraY カメラの中心点のy座標
+     * @param cameraX     カメラの中心点のx座標
+     * @param cameraY     カメラの中心点のy座標
+     * @param cameraAngle カメラの角度　12時から時計回り　ラジアン
      */
-    void changeToDisplayPoint(float cameraX, float cameraY)
+    public void changeToDisplayPoint(float cameraX, float cameraY, float cameraAngle)
     {
-        diX = abX - cameraX + Play.DISPLAY_WIDTH / 2;
-        diY = abY - cameraY + Play.DISPLAY_HEIGHT / 2;
+        double radius = Math.sqrt(Math.pow(abX - cameraX, 2) + Math.pow(abY - cameraY, 2));
+        double angle = Math.atan2(abY - cameraY, abX - cameraX) - cameraAngle;
+        diX = (float) (radius * Math.cos(angle) + Play.DISPLAY_WIDTH / 2);
+        diY = (float) (radius * Math.sin(angle) + Play.DISPLAY_HEIGHT / 2);
     }
 
     /**

@@ -12,16 +12,19 @@ import org.newdawn.slick.Graphics;
  */
 public class ObjectPool
 {
-    Ball[] balls = new Ball[5];
     Camera camera;
+    Car car;
+    Car[] cars;
 
     ObjectPool()
     {
-        for (int i = 0; i < balls.length; i++)
-        {
-            balls[i] = new Ball();
-        }
         camera = new Camera();
+        car = new Car(500,700);
+        cars = new Car[10];
+        for (int i = 0; i < cars.length; i++)
+        {
+            cars[i] = new Car(i * 10, i * 10);
+        }
         init();
     }
 
@@ -30,6 +33,10 @@ public class ObjectPool
      */
     public void init()
     {
+        for (int i = 0; i < cars.length; i++)
+        {
+            cars[i].active = true;
+        }
     }
 
     /**
@@ -37,9 +44,10 @@ public class ObjectPool
      */
     public void update(GameContainer gc)
     {
-        updateObjects(balls, gc);
-        camera.update(0, 0);
-        //System.out.println(0);
+        camera.update(0, 0, (float) Play.counter / 100);
+        System.out.println(camera.angle);
+        car.update(gc, camera.x, camera.y, camera.angle);
+        updateObjects(cars, gc);
     }
 
     /**
@@ -47,7 +55,8 @@ public class ObjectPool
      */
     public void render(Graphics g)
     {
-        renderObjects(balls, g);
+        car.render(g);
+        renderObjects(cars, g);
     }
 
     /**
@@ -55,18 +64,6 @@ public class ObjectPool
      */
     public void collisionDetection()
     {
-        // ボールと壁の衝突
-        for (int i = 0; i < balls.length; i++)
-        {
-            if (balls[i].diY >= Play.DISPLAY_HEIGHT)
-            {
-                balls[i].boundY();
-            }
-            if (balls[i].diX <= 0 || balls[i].diX >= Play.DISPLAY_WIDTH)
-            {
-                balls[i].boundX();
-            }
-        }
     }
 
     /**
@@ -93,7 +90,7 @@ public class ObjectPool
         {
             if (obj.active)
             {
-                obj.update(gc, 0, 0);
+                obj.update(gc, camera.x, camera.y, camera.angle);
             }
         }
     }
