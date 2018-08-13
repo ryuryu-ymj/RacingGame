@@ -14,17 +14,11 @@ public class ObjectPool
 {
     Camera camera;
     Car car;
-    Car[] cars;
 
     ObjectPool()
     {
         camera = new Camera();
-        car = new Car(500,700);
-        cars = new Car[10];
-        for (int i = 0; i < cars.length; i++)
-        {
-            cars[i] = new Car(i * 10, i * 10);
-        }
+        car = new Car(0, 0);
         init();
     }
 
@@ -33,10 +27,6 @@ public class ObjectPool
      */
     public void init()
     {
-        for (int i = 0; i < cars.length; i++)
-        {
-            cars[i].active = true;
-        }
     }
 
     /**
@@ -45,9 +35,10 @@ public class ObjectPool
     public void update(GameContainer gc)
     {
         camera.update(0, 0, (float) Play.counter / 100);
-        System.out.println(camera.angle);
-        car.update(gc, camera.x, camera.y, camera.angle);
-        updateObjects(cars, gc);
+        //System.out.println(camera.angle);
+        System.out.println(car.diX + " " + car.diY);
+        car.update(gc, camera.x, camera.y);
+        car.move(gc);
     }
 
     /**
@@ -56,7 +47,6 @@ public class ObjectPool
     public void render(Graphics g)
     {
         car.render(g);
-        renderObjects(cars, g);
     }
 
     /**
@@ -90,7 +80,7 @@ public class ObjectPool
         {
             if (obj.active)
             {
-                obj.update(gc, camera.x, camera.y, camera.angle);
+                obj.update(gc, camera.x, camera.y);
             }
         }
     }

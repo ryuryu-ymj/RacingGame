@@ -12,18 +12,12 @@ public class Camera
      * 画面の中心座標
      */
     float x, y;
-    /**
-     * カメラの角度<br>
-     * 12時から時計回り　ラジアン
-     */
-    float angle;
     boolean active;
 
     Camera()
     {
         x = 0;
         y = 0;
-        angle = 0;
         active = true;
     }
 
@@ -41,7 +35,6 @@ public class Camera
         {
             this.x = x;
             this.y = y;
-            this.angle = angle;
         }
     }
 }

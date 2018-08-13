@@ -3,6 +3,7 @@ package racingGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 public class Car extends GameObject
 {
@@ -24,10 +25,26 @@ public class Car extends GameObject
         height = 60;
     }
 
-    @Override
-    public void update(GameContainer gc, float cameraX, float cameraY, float cameraAngle)
+    public void move(GameContainer gc)
     {
-        changeToDisplayPoint(cameraX, cameraY, cameraAngle);
+    	if(gc.getInput().isKeyDown(Input.KEY_UP)) {
+            abY-=1;
+    	}
+    	if(gc.getInput().isKeyDown(Input.KEY_DOWN)) {
+            abY+=1;
+    	}
+    	if(gc.getInput().isKeyDown(Input.KEY_LEFT)) {
+            abX-=1;
+    	}
+    	if(gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+            abX+=1;
+    	}
+    }
+
+    @Override
+    public void update(GameContainer gc, float cameraX, float cameraY)
+    {
+        changeToDisplayPoint(cameraX, cameraY);
     }
 
     @Override
